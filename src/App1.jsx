@@ -7,8 +7,7 @@ const App = () => {
         <>
             Enter Name : <input id="txt" type="text" placeholder="Name"  />
             <input type="button" value="Greet"
-            onClick={(e)=>{greetMessage(e)}} />  
-            
+            onClick={(e)=>{greetMessage(e)}} />             
             
         </>
     )

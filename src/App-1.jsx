@@ -3,9 +3,7 @@ import { useState } from "react"
 const App = () => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-
-    const handleSignin = (e) => {
-       
+    const handleSignin = (e) => {       
         if(username === 'admin' && password === '12345'){
             alert("Login Success")
             e.target.value = 'Login Success'
