@@ -1,34 +1,45 @@
 import { useState } from "react"
 
 const App = () => {
-    const [make, setMake] = useState(null)
-    const [year, setYear] = useState(null)
-    const [model, setModel] = useState(null)
-    const [color, setColor] = useState(null)
+    const [car, setCar] = useState(null)
+    const handler = (e) => {
+        // console.log(e.target.name)
+        // console.log(e.target.value)
+        setCar({...car, [e.target.name]: e.target.value})
+        console.log(car)
+    }
     return (
         <>
             <h1>Provide Your Car Details</h1>
             <label>
-                Make <input type="text" 
-                onInput={(e)=>{setMake(e.target.value)}}/>
+                Make <input name="make" type="text"
+                onInput={(e)=>{handler(e)}}/>
             </label><br />
             <label>
-                Year <input type="text" 
-                onInput={(e)=>{setYear(e.target.value)}}/>
+                Year <input name="year" type="text"
+                onInput={(e)=>{handler(e)}}/>
             </label><br />
             <label>
-                Model <input type="text" 
-                onInput={(e)=>{setModel(e.target.value)}}/>
+                Model <input name="model" type="text"
+                onInput={(e)=>{handler(e)}}/>
             </label><br />
             <label>
-                Color <input type="text" 
-                onInput={(e)=>{setColor(e.target.value)}}/>
+                Color <input name="color" type="text"
+                onInput={(e)=>{handler(e)}}/>
             </label><br />
                 {
-                    make && year && model && color &&
+                   
                     <div>
                         <h1>The Given details are</h1>
-                        {make} {year} {model} {color}
+                        {
+                            car &&
+                            <>
+                            <p>{car.make}</p>
+                            <p>{car.year}</p>
+                            <p>{car.model}</p>
+                            <p>{car.color}</p>
+                            </>
+                        }
                     </div>
 
                 }
