@@ -1,28 +1,31 @@
 import { useState } from "react"
 
 const App = () => {
-    const [username, setUsername] = useState(null)
-    const [password, setPassword] = useState(null)
-    const handleSignin = (e) => {       
-        if(username === 'admin' && password === '12345'){
-            alert("Login Success")
-            e.target.value = 'Login Success'
-        }else{
-            alert('Login Failed')
-            e.target.value = 'Login Failed'
+
+    const [user, setUser] = useState(null)
+    const handler = (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
+        console.log(user)
+    }
+    const login = () => {
+        if(user){
+            if(user.username==="admin" && user.password==="12345"){
+                alert("Login Success")
+            }else{
+                alert("Login Failed")
+            }
         }
     }
+
     return (
         <>
-            <input id="username"  type="text" placeholder="Username" 
-            onChange={(e)=>{setUsername(e.target.value)}}/> <br />
-            <input id="password" type="password" placeholder="Password" 
-            onInput={(e)=>{setPassword(e.target.value)}}/> <br />
-            <input type="button" value="Signin" onClick={(e)=>{handleSignin(e)}} /> <br />
-            { 
-                username &&
-                <>Username is {username}</>
-            }
+            <input name="username"  type="text" placeholder="Username"
+            onChange={(e)=>{handler(e)}}/> <br />
+            <input name="password" type="password" placeholder="Password" 
+            onInput={(e)=>{handler(e)}}/> <br />
+            <input type="button" value="Signin" 
+            onClick={()=>{login()}}/> <br />
+
         
         </>
     )
