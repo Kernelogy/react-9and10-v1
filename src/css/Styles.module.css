@@ -1,0 +1,15 @@
+.bigblue{
+    background-color: aqua;
+    color: DodgerBlue;
+    padding: 45px;
+    font-family: Sans-Serif;
+    text-align: center;
+}
+
+.bigred{
+    background-color: aqua;
+    color: rgb(255, 30, 30);
+    padding: 45px;
+    font-family: Sans-Serif;
+    text-align: center;
+}
