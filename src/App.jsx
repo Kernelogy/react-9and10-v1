@@ -16,7 +16,6 @@ const App = () => {
         console.log(todos)
     }
     const setState = (id) => {
-        // alert("Working... " + id)
         setTodos(
             todos.map((e)=>{
                 if(e.id === id){
@@ -25,6 +24,13 @@ const App = () => {
                 }else{
                     return e
                 }
+            })
+        )
+    }
+    const deleteTodo = (id) => {
+        setTodos(
+            todos.filter((e)=>{
+                return e.id !== id
             })
         )
     }
@@ -37,7 +43,7 @@ const App = () => {
             onClick={(e)=>{addTodo()}}/>
 
             <h1>My Todo List</h1>
-            <TodoList todos={todos} setState={setState}/>
+            <TodoList todos={todos} setState={setState} deleteTodo={deleteTodo} />
 
         </>
     )
