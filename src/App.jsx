@@ -1,49 +1,47 @@
-import { useRef, useState } from "react"
+import { useReducer, useRef, useState } from "react"
 import TodoList from "./components/TodoList"
 
 const App = () => {
-    const [todos, setTodos] = useState([])
-    const [text, setText] = useState("")
     const count = useRef(0)
-    const addTodo = () =>{
-        count.current = count.current + 1
-        const todo = {
-            id: count.current,
-            text: text,
-            isCompleted: false
-        }
-        setTodos([...todos, todo])
-        console.log(todos)
-    }
-    const setState = (id) => {
-        setTodos(
-            todos.map((e)=>{
-                if(e.id === id){
-                    console.log(e)
-                    return { ...e, isCompleted: !e.isCompleted }
-                }else{
-                    return e
+    const [text, setText] = useState("")
+
+    const reducer = (state, action)=>{
+        console.log("State", state)
+        console.log("Action", action)
+        switch(action.type){
+            case "ADD":
+                count.current = count.current + 1
+                const todo = {
+                    id: count.current,
+                    text: action.text,
+                    isCompleted: false
                 }
-            })
-        )
+                return [...state, todo] 
+            case "EDIT":
+                return state               
+            case "DELETE":
+                return state
+            case "COMPLETE":
+                return state
+            default:
+                return null
+        }
     }
-    const deleteTodo = (id) => {
-        setTodos(
-            todos.filter((e)=>{
-                return e.id !== id
-            })
-        )
-    }
+    const [todos, dispatch] = useReducer(reducer, []);
+
     return (
         <>   
             <input type="text" placeholder="Type your Todo..." 
             onInput={(e)=>setText(e.target.value)}/>
 
             <input type="button" value="Add" 
-            onClick={(e)=>{addTodo()}}/>
+            onClick={(e)=>{
+                dispatch({type: "ADD", text: text})
+            }}/>
 
             <h1>My Todo List</h1>
-            <TodoList todos={todos} setState={setState} deleteTodo={deleteTodo} />
+            <TodoList todos={todos} 
+            />
 
         </>
     )

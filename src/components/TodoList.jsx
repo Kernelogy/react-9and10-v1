@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const TodoList = ({todos, setState, deleteTodo}) => {
+const TodoList = ({todos, setState, deleteTodo, editText}) => {
     const [isEdit, setIsEdit] = useState(false)
     const [editId, setEditId] = useState(null)
     const changeEdit = (id) => {
@@ -41,8 +41,14 @@ const TodoList = ({todos, setState, deleteTodo}) => {
                     </>
                 }else{
                     return <>
-                        <input type="text" value={e.text}/>
-                        <input type="button" value="Save"/>
+                        <input type="text" value={e.text} 
+                        onInput={(evt)=>{
+                            editText(
+                                {...e, text: evt.target.value}
+                            )
+                        }}/>
+                        <input type="button" value="Save" 
+                        onClick={(evt)=>{setIsEdit(false)}}/> <br />
                     </>
                 }
 
